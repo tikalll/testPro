@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="Generator" content="EditPlus®">
+    <meta name="Author" content="">
+    <meta name="Keywords" content="">
+    <meta name="Description" content="">
+    <title>Document</title>
+    <script src="./jquery.min.js"></script>
+    <script src="./echarts.min.js"></script>
+    <script src="./data2.js"></script>
+</head>
+<body>
+<div id="main" style="width:1100px;height:630px;"></div>
+</body>
+<script type="text/javascript">
+    var myChart = echarts.init(document.getElementById('main'));
+    myChart.on("click", clickFun);
+    function clickFun(param) {
+        if (param.type == 'click' && !param.data.children) {
+            alert(param.name);
+        }
+    }
+    myChart.setOption(option = {
+        tooltip: {
+            trigger: 'item',
+            triggerOn: 'mousemove'
+        },
+        series: [
+            {
+                type: 'tree',
+                data: [data],
+                orient: 'vertical',//horizontal
+                symbol: 'rect',
+                left: '2%',
+                right: '2%',
+                top: '5%',
+                bottom: '20%',
+                tooltip: {
+                    trigger: 'item',
+                    formatter: function (params, ticket, callback) {
+                        return params.data.tip;
+                    }
+                },
+                itemStyle: {
+                    borderColor: "green",
+                    color: "#ffffff",
+                    borderWidth: 1
+                },
+                symbolSize: [25, 80],
+                initialTreeDepth: 9,
+                label: {
+                    normal: {
+                        position: 'inside',
+                        rotate: -90,
+                        verticalAlign: 'middle',
+                        align: 'center',
+                        fontSize: 12,
+                        color: 'darkblue'
+                    }
+                },
+                leaves: {
+                    label: {
+                        normal: {
+                            position: 'inside',
+                            verticalAlign: 'middle',
+                            align: 'center'
+                        }
+                    }
+                },
+                lineStyle: {
+                    color: 'grey',
+                    width: 1,
+                    curveness: 0.5
+                },
+                expandAndCollapse: true,
+                animationDuration: 550,
+                animationDurationUpdate: 750
+            }
+        ]
+    });
+
+</script>
+</html>
